@@ -49,12 +49,31 @@ def character(request, character):
     name = character.split(" ")
     if len(name) == 3:
         link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])+'+'+str(name[2])
-    else:
+    elif len(name) == 2:
         link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])
-    
+    else:
+        link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])
     response = requests.get(link)
     lista = response.json()
     return render(request, 'series/show_character.html', {'list':lista[0]})
 
+def search(request):
+    query = request.GET.get('q')
+    name = query.split(" ")
+    if len(name) == 1 and name[0] != '':
+      link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])
+      response = requests.get(link)
+      lista = response.json()
+    elif len(name) == 2:
+      link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])
+      response = requests.get(link)
+      lista = response.json()
+    elif len(name) == 3:
+      link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])+'+'+str(name[2])
+      response = requests.get(link)
+      lista = response.json()
+    else:
+      lista = []
+    return render(request, 'series/results_search.html',{'list': lista})
 
 

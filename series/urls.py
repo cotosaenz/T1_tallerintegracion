@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:id_season>/better_call_saul_season/', views.bcs_season, name='bcs_season'),
     path('<int:id_episode>/episode/', views.episode, name='episode'),
     path('<str:character>/character', views.character, name='character'),
+    path('searching_character/', views.search, name='search'),
 ]
