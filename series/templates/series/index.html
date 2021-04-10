@@ -1,0 +1,78 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+  
+  <title>Tarea 1</title>
+  
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+  
+    {# CSS Bootstrap #}
+    {% bootstrap_css %}
+</head>
+
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand" href="{% url 'index' %}">Tarea 1</a>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+<body>
+  <div class="jumbotron text-center">
+    <h1>Elige una serie</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        	<br />
+        	<div id="Accordion" role="tablist" aria-multiselectable="true">
+        		<div class="panel panel-default">
+              <img src="https://i.blogs.es/6d84c8/breaking-bad/1366_2000.jpg" width="380" height="200">
+        			<div class="panel-heading" role="tab" id="HeadingOne">
+        				<h4 class="panel-title">
+        					<a data-toggle="collapse" data-parent="#Accordion" href="#CollapseOne" aria-expanded="true" aria-controls="CollapseOne">
+        					Breaking Bad
+        					</a>
+        				</h4>
+        			</div>
+        			<div id="CollapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="HeadingOne">
+                  {% for id_season in bb %}
+                    <a href="{% url 'bb_season' id_season %}">Temporada {{ id_season }}</a></br>
+                  {% endfor %}
+        			</div>
+        		</div>
+            </br>
+            <img src="http://www.srgeekarg.com/wp-content/uploads/2020/04/Better-Call-Saul-temporada-cinco-min.jpg" width="380" height="200">
+        		<div class="panel panel-default">
+        			<div class="panel-heading" role="tab" id="HeadingTwo">
+        				<h4 class="panel-title">
+        					<a class="collapsed" data-toggle="collapse" data-parent="#Accordion" href="#CollapseTwo" aria-expanded="false" aria-controls="CollapseTwo">
+        					Better Call Saul
+        					</a>
+        				</h4>
+        			</div>
+        			<div id="CollapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="HeadingTwo">
+                  {% for id_season in bcs %}
+                    <a href="{% url 'bcs_season' id_season %}">Temporada {{ id_season }}</a></br>
+                  {% endfor %}
+        			</div>
+        		</div>
+        	</div>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+  <!-- jQuery first, then Bootstrap JS. -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+</body>
+<!-- codigo obtenido de https://www.youtube.com/watch?v=oEO17mqk5zM-->
+

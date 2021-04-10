@@ -1,0 +1,59 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+  
+  <title>Tarea 1</title>
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+    {# CSS Bootstrap #}
+    {% bootstrap_css %}
+</head>
+
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand" href="{% url 'index' %}">INICIO</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+<div class="jumbotron text-center">
+  <h2>{{ list.name }}</h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+      <div>
+        <img src={{list.img}} width="340" height="400" >
+      </div>
+      </br>
+      <div>
+        <ul>
+          <li>Nickname: {{list.nickname}}</li>
+          <li>Roles: 
+            {% for role in list.occupation %}
+              {{role}},
+            {% endfor %}
+          </li>
+          <li>Actor/Actriz: {{list.portrayed}}</li>
+          <li>Estado: {{list.status}}</li>
+          <li>Temporadas Breaking Bad: 
+            {% for id_season in list.appearance %}
+              <a href="{% url 'bb_season' id_season %}">{{ id_season }},</a>
+            {% endfor %}
+          </li>
+          <li>Temporadas Better Call Saul:
+            {% for id_season in list.better_call_saul_appearance %}
+              <a href="{% url 'bcs_season' id_season %}">{{ id_season }},</a>
+            {% endfor %}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-4">
+  </div>
+</div> 

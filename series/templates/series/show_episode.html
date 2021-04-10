@@ -1,0 +1,49 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+  
+  <title>Tarea 1</title>
+  
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+  
+    {# CSS Bootstrap #}
+    {% bootstrap_css %}
+</head>
+  
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand" href="{% url 'index' %}">INICIO</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+<div class="jumbotron text-center">
+  <h2>{{ list.title }}</h2>
+</div>
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <ul>
+          <li>Temporada: {{list.season}}</li>
+          <li>Episodio: {{list.episode}}</li>
+          <li>Fecha: {{list.air_date}}</li></br>
+          Personajes: </br>
+          <ul>
+          {% for personaje in list.characters %}
+            <li><a href="{% url 'character' personaje %}">{{ personaje }}</a></li>
+          {% endfor %}
+          </ul>
+        </ul>
+      </div>
+      <div class="col-sm-4">
+      </div>
+  </div>
+</div>  
+  
