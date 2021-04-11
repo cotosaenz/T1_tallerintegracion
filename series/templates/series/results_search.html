@@ -21,7 +21,8 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </nav>
-<div class="jumbotron text-center">
+{% if list %}
+  <div class="jumbotron text-center">
     <h2>Resultados de la búsqueda</h2>
   </div>
   <div class="container">
@@ -42,3 +43,7 @@
       <div class="col-sm-4">
     </div>
   </div> 
+{% else %}
+  <h1>Hubo un error, intenta nuevamente.</h1>
+  <p>{{ error }}</p>
+{% endif %}

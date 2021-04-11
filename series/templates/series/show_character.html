@@ -19,49 +19,62 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </nav>
-<div class="jumbotron text-center">
-  <h2>{{ list.name }}</h2>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md">
-      <div>
-        <img src={{list.img}} width="340" height="400" >
-      </div>
-      </br>
-      <div>
-        <ul>
-          <li><strong>Nickname:</strong> {{list.nickname}}</li>
-          <li><strong>Roles:</strong> 
-            {% for role in list.occupation %}
-              {{role}},
-            {% endfor %}
-          </li>
-          <li><strong>Actor/Actriz:</strong> {{list.portrayed}}</li>
-          <li><strong>Estado:</strong> {{list.status}}</li>
-          <li><strong>Temporadas Breaking Bad:</strong> 
-            {% for id_season in list.appearance %}
-              <a href="{% url 'bb_season' id_season %}">{{ id_season }},</a>
-            {% endfor %}
-          </li>
-          <li><strong>Temporadas Better Call Saul:</strong>
-            {% for id_season in list.better_call_saul_appearance %}
-              <a href="{% url 'bcs_season' id_season %}">{{ id_season }},</a>
-            {% endfor %}
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md">
-          <h3>Citas:</h3>
-          {% if not citas %}
-            <p>No hay citas disponibles para este personaje</p>
-          {% else %}
-            <ul>
-              {% for cita in citas %}
-                <li>{{cita.quote}}</li>
+{% if list %}
+  <div class="jumbotron text-center">
+    <h2>{{ list.name }}</h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md">
+        <div>
+          <img src={{list.img}} width="310" height="400" >
+        </div>
+        </br>
+        <div>
+          <ul>
+            <li><strong>Nickname:</strong> {{list.nickname}}</li>
+            <li><strong>Roles:</strong> 
+              {% for role in list.occupation %}
+                {{role}},
               {% endfor %}
-            </ul>
-          {% endif %}
-    </div>
-</div> 
+            </li>
+            <li><strong>Actor/Actriz:</strong> {{list.portrayed}}</li>
+            <li><strong>Estado:</strong> {{list.status}}</li>
+            <li><strong>Temporadas Breaking Bad:</strong> 
+              {% if list.appearance %}
+                {% for id_season in list.appearance %}
+                  <a href="{% url 'bb_season' id_season %}">{{ id_season }},</a>
+                {% endfor %}
+              {% else %}
+                Ninguna
+              {% endif %}  
+            </li>
+            <li><strong>Temporadas Better Call Saul:</strong>
+              {% if list.better_call_saul_appearance %}
+                {% for id_season in list.better_call_saul_appearance %}
+                  <a href="{% url 'bcs_season' id_season %}">{{ id_season }},</a>
+                {% endfor %}
+              {% else %}
+                Ninguna
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+            <h3>Citas:</h3>
+            {% if not citas %}
+              <p>No hay citas disponibles para este personaje</p>
+            {% else %}
+              <ul>
+                {% for cita in citas %}
+                  <li>{{cita.quote}}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+      </div>
+  </div> 
+{% else %}
+  <h1>Hubo un error, intenta nuevamente.</h1>
+  <p>{{ error }}</p>
+{% endif %}

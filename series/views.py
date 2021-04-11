@@ -3,10 +3,10 @@ from django.http import HttpResponse
 from django.template import loader
 import requests
 
-# Create your views here.
 
 def index(request):
-    response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/episodes?series=Breaking+Bad') #revisar si puedo hacer esto afuera y dsps pasarlo como parametro a las funciones!
+  try:
+    response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/episodes?series=Breaking+Bad')
     bblist = response.json()
     bb_total = int(bblist[-1]['season'])
     bb_seasons = []
@@ -19,8 +19,11 @@ def index(request):
     for i in range(1, bcs_total+1):
         bcs_seasons.append(i)
     return render(request, 'series/index.html', {'bb':bb_seasons, 'bcs':bcs_seasons})
+  except Exception as ex: 
+    return render(request, 'series/index.html', {'error': ex})
 
 def bb_season(request, id_season):
+  try:
     response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/episodes?series=Breaking+Bad')
     lista = response.json()
     episodes = []
@@ -28,8 +31,11 @@ def bb_season(request, id_season):
         if episode['season'] == str(id_season):
             episodes.append(episode)
     return render(request, 'series/show_temporada.html', {'list':episodes})
+  except Exception as ex: 
+    return render(request, 'series/show_temporada.html', {'error': ex})
 
 def bcs_season(request, id_season):
+  try:
     response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/episodes?series=Better+Call+Saul')
     lista = response.json()
     episodes = []
@@ -37,15 +43,21 @@ def bcs_season(request, id_season):
         if episode['season'] == str(id_season):
             episodes.append(episode)
     return render(request, 'series/show_temporada.html',{'list':episodes})
+  except Exception as ex: 
+    return render(request, 'series/show_temporada.html', {'error': ex})
 
 def episode(request, id_episode):
+  try:
     link = 'https://tarea-1-breaking-bad.herokuapp.com/api/episodes/'+str(id_episode)
     response = requests.get(link)
     lista = response.json()
     lista[0]['air_date'] = lista[0]['air_date'][0:10]
     return render(request, 'series/show_episode.html',{'list':lista[0]})
+  except Exception as ex: 
+    return render(request, 'series/show_episode.html', {'error': ex})
 
 def character(request, character):
+  try:
     name = character.split(" ")
     if len(name) == 3:
         link1 = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])+'+'+str(name[2])
@@ -61,8 +73,11 @@ def character(request, character):
     response2 = requests.get(link2)
     citas = response2.json()
     return render(request, 'series/show_character.html', {'list':lista[0], 'citas':citas})
+  except Exception as ex: 
+    return render(request, 'series/show_character.html', {'error': ex})
 
 def search(request):
+  try:
     query = request.GET.get('q')
     name = query.split(" ")
     lista = []
@@ -88,5 +103,7 @@ def search(request):
     else:
       lista = []
     return render(request, 'series/results_search.html',{'list': lista})
+  except Exception as ex: 
+    return render(request, 'series/results_search.html', {'error': ex})
 
 
