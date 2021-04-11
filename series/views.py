@@ -60,10 +60,18 @@ def character(request, character):
 def search(request):
     query = request.GET.get('q')
     name = query.split(" ")
+    lista = []
+    l = []
+    i = 0
     if len(name) == 1 and name[0] != '':
-      link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])
-      response = requests.get(link)
-      lista = response.json()
+      while len(l) > 0 or i == 0:  
+        link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'&limit=10&offset='+str(i)
+        response = requests.get(link)
+        l = response.json()
+        lista += l
+        if name[0].lower() == 'victor':
+            l = []
+        i += 10
     elif len(name) == 2:
       link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])
       response = requests.get(link)
