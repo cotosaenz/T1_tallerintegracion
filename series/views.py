@@ -48,14 +48,19 @@ def episode(request, id_episode):
 def character(request, character):
     name = character.split(" ")
     if len(name) == 3:
-        link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])+'+'+str(name[2])
+        link1 = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])+'+'+str(name[2])
+        link2 = 'https://tarea-1-breaking-bad.herokuapp.com/api/quote?author='+str(name[0])+'+'+str(name[1])+'+'+str(name[2])
     elif len(name) == 2:
-        link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])
+        link1 = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])+'+'+str(name[1])
+        link2 = 'https://tarea-1-breaking-bad.herokuapp.com/api/quote?author='+str(name[0])+'+'+str(name[1])
     else:
-        link = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])
-    response = requests.get(link)
-    lista = response.json()
-    return render(request, 'series/show_character.html', {'list':lista[0]})
+        link1 = 'https://tarea-1-breaking-bad.herokuapp.com/api/characters?name='+str(name[0])
+        link2 = 'https://tarea-1-breaking-bad.herokuapp.com/api/quote?author='+str(name[0])
+    response1 = requests.get(link1)
+    lista = response1.json()
+    response2 = requests.get(link2)
+    citas = response2.json()
+    return render(request, 'series/show_character.html', {'list':lista[0], 'citas':citas})
 
 def search(request):
     query = request.GET.get('q')

@@ -15,7 +15,7 @@
 </head>
 
 <nav class="navbar navbar-dark bg-dark justify-content-between">
-  <a class="navbar-brand" href="{% url 'index' %}">Tarea 1</a>
+  <a class="navbar-brand" href="{% url 'index' %}">TAREA 1</a>
     <form class="form-inline" action="{% url 'search' %}" method="get">
       <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -34,11 +34,10 @@
         	<br />
         	<div id="Accordion" role="tablist" aria-multiselectable="true">
         		<div class="panel panel-default">
-              <img src="https://i.blogs.es/6d84c8/breaking-bad/1366_2000.jpg" width="380" height="200">
         			<div class="panel-heading" role="tab" id="HeadingOne">
         				<h4 class="panel-title">
         					<a data-toggle="collapse" data-parent="#Accordion" href="#CollapseOne" aria-expanded="true" aria-controls="CollapseOne">
-        					Breaking Bad
+                    <img class="img-responsive" src="https://i.blogs.es/6d84c8/breaking-bad/1366_2000.jpg" width="380" height="200">
         					</a>
         				</h4>
         			</div>
@@ -49,12 +48,11 @@
         			</div>
         		</div>
             </br>
-            <img src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/OWLJOFVVT5DMZOVYITTXBPDNN4.jpg" width="380" height="200">
         		<div class="panel panel-default">
         			<div class="panel-heading" role="tab" id="HeadingTwo">
         				<h4 class="panel-title">
         					<a class="collapsed" data-toggle="collapse" data-parent="#Accordion" href="#CollapseTwo" aria-expanded="false" aria-controls="CollapseTwo">
-        					Better Call Saul
+        					  <img class="img-responsive" src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/OWLJOFVVT5DMZOVYITTXBPDNN4.jpg" width="380" height="200">
         					</a>
         				</h4>
         			</div>
@@ -63,6 +61,7 @@
                     <a href="{% url 'bcs_season' id_season %}">Temporada {{ id_season }}</a></br>
                   {% endfor %}
         			</div>
+            </br></br>
         		</div>
         	</div>
         </div>

@@ -13,7 +13,7 @@
 </head>
 
 <nav class="navbar navbar-dark bg-dark justify-content-between">
-  <a class="navbar-brand" href="{% url 'index' %}">Tarea 1</a>
+  <a class="navbar-brand" href="{% url 'index' %}">INICIO</a>
     <form class="form-inline" action="{% url 'search' %}" method="get">
       <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -24,29 +24,27 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
-    </div>
-    <div class="col-sm-4">
+    <div class="col-md">
       <div>
         <img src={{list.img}} width="340" height="400" >
       </div>
       </br>
       <div>
         <ul>
-          <li>Nickname: {{list.nickname}}</li>
-          <li>Roles: 
+          <li><strong>Nickname:</strong> {{list.nickname}}</li>
+          <li><strong>Roles:</strong> 
             {% for role in list.occupation %}
               {{role}},
             {% endfor %}
           </li>
-          <li>Actor/Actriz: {{list.portrayed}}</li>
-          <li>Estado: {{list.status}}</li>
-          <li>Temporadas Breaking Bad: 
+          <li><strong>Actor/Actriz:</strong> {{list.portrayed}}</li>
+          <li><strong>Estado:</strong> {{list.status}}</li>
+          <li><strong>Temporadas Breaking Bad:</strong> 
             {% for id_season in list.appearance %}
               <a href="{% url 'bb_season' id_season %}">{{ id_season }},</a>
             {% endfor %}
           </li>
-          <li>Temporadas Better Call Saul:
+          <li><strong>Temporadas Better Call Saul:</strong>
             {% for id_season in list.better_call_saul_appearance %}
               <a href="{% url 'bcs_season' id_season %}">{{ id_season }},</a>
             {% endfor %}
@@ -54,6 +52,16 @@
         </ul>
       </div>
     </div>
-    <div class="col-sm-4">
-  </div>
+    <div class="col-md">
+          <h3>Citas:</h3>
+          {% if not citas %}
+            <p>No hay citas disponibles para este personaje</p>
+          {% else %}
+            <ul>
+              {% for cita in citas %}
+                <li>{{cita.quote}}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+    </div>
 </div> 
